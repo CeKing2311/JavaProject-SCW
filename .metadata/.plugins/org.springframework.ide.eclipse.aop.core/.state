@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="crowdfunding-admin-webui">
+<aspect-definition advice-class-name="org.springframework.transaction.interceptor.TransactionInterceptor" advice-method-name="invoke" advice-method-parameter-types="org.aopalliance.intercept.MethodInvocation" advice-type="AROUND" aspect-end-line-number="25" aspect-name="txAdvice" aspect-start-line-number="25" factory-id="org.springframework.ide.eclipse.aop.core.javaAdvisorDefinitionElementFactory" file="/crowdfunding-admin-webui/src/main/resources/spring-persisit-tx.xml" pointcut-expression="execution(* *..*ServiceImpl.*(..))" proxy-target-class="false">
+<aop-reference advice-type="AROUND" bean="1:BeansModel|2:crowdfunding-admin-webui|3:src/main/resources/spring-persisit-tx.xml|7:beans:10|8:adminServiceImpl:10" bean-file="/crowdfunding-admin-webui/src/main/resources/spring-persisit-tx.xml" bean-start-line="10" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/crowdfunding-admin-webui/src/main/resources/spring-persisit-tx.xml" source="=crowdfunding-admin-webui/D:\/developer_tools\/maven-repository\/org\/springframework\/spring-tx\/4.3.20.RELEASE\/spring-tx-4.3.20.RELEASE.jar&lt;org.springframework.transaction.interceptor(TransactionInterceptor.class[TransactionInterceptor~invoke~Lorg.aopalliance.intercept.MethodInvocation;" source-start-line="-1" target="=crowdfunding-admin-component/src\/main\/java&lt;com.ceking.crowd.service.impl{AdminServiceImpl.java[AdminServiceImpl~saveAdmin~QAdmin;" target-start-line="16"/>
+</aspect-definition>
+</aop-project>
+</aop-reference-model>
