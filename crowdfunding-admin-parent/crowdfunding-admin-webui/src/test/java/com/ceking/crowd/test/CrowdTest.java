@@ -43,6 +43,7 @@ public class CrowdTest {
 		logger.debug("debug level!");
 		logger.info("info level!!!");
 		logger.warn("wram level!");
+		logger.info("adminService:"+adminService);
 	}
 	
 	

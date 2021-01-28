@@ -1,0 +1,11 @@
+package com.ceking.crowd.test;
+
+import org.junit.Test;
+
+public class ConnectTest {
+	
+	@Test
+	public void testSay(){
+			
+	}
+}

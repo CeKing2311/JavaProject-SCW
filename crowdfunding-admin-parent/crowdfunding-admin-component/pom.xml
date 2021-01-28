@@ -90,7 +90,7 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
-		
+
 		<!-- 日志依赖 -->
 		<!-- 使用slf4j替换commons-logging日志 -->
 		<dependency>
@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
+		</dependency>		
 
 
 	</dependencies>

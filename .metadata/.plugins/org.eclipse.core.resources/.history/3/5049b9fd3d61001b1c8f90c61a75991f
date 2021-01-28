@@ -1,8 +1,0 @@
-package com.ceking.crowd.test;
-
-import org.springframework.test.context.ContextConfiguration;
-
-@ContextConfiguration(locations={"classpath:spring-persist-mybatis.xml"})
-public class CrowdTest {
-
-}
