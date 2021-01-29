@@ -1,0 +1,91 @@
+package com.ceking.crowd.mvc.controller;
+
+import java.sql.Savepoint;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ceking.crowd.contant.CrowdConstant;
+import com.ceking.crowd.entity.Admin;
+import com.ceking.crowd.service.api.AdminService;
+import com.ceking.crowd.util.CrowdUtil;
+import com.github.pagehelper.PageInfo;
+
+@Controller
+public class AdminController {
+
+	@Autowired
+	private AdminService adminService;
+
+	
+	@RequestMapping("admin/save.html")
+	public String saveAdmin(Admin admin){
+		String userPswd = admin.getUserPswd();
+		userPswd= CrowdUtil.md5Encryption(userPswd);
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String createTime = dateFormat.format(date);
+		admin.setCreateTime(createTime);
+		
+		admin.setUserPswd(userPswd);		
+		adminService.saveAdmin(admin);
+		return  "";
+	}
+	
+	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyWord}.html")
+	public String removeAdmin(@PathVariable("adminId") Integer adminId
+			,@PathVariable("pageNum") Integer pageNum 
+			,@PathVariable(name="keyWord",value="")String keyWord) {		
+		adminService.remove(adminId);
+		//重定向回当前页
+		return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyWord="+keyWord;
+	}
+	
+	@RequestMapping("/admin/get/page.html")
+	public String  getAdminPageInfo(
+			@RequestParam(value="keyWord",defaultValue="")String keyWord,
+			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="5")Integer pageSize,
+			ModelMap modelMap) {
+		PageInfo<Admin> pageInfo = adminService.selectAdminByKeyWord(keyWord, pageNum, pageSize);
+		modelMap.addAttribute(CrowdConstant.ATTR_NAME_PAGE_INFO, pageInfo);
+		return "admin-page";
+	}
+	
+	/**
+	 * 登录方法
+	 * @param loginAcct
+	 * @param userPass
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/admin/to/login.html")
+	public String doLogin(@RequestParam("loginAcct") String loginAcct, @RequestParam("userPass") String userPass,
+			HttpSession session) {
+
+		Admin admin = adminService.getAdminByLoginAcct(loginAcct, userPass);
+		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
+		return "redirect:/admin/to/main/page.html";
+	}
+
+	/**
+	 * 退出
+	 * 
+	 * @param sessin
+	 * @return
+	 */
+	@RequestMapping("/admin/to/loginout.html")
+	public String doLoginOut(HttpSession sessin) {
+		sessin.invalidate();
+		return "redirect:/admin/to/login/page.html";
+	}
+
+}

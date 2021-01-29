@@ -13,3 +13,5 @@ CREATE TABLE t_admin(
 	create_time CHAR(19), # 创建时间
 	PRIMARY KEY (id)
 );
+#添加索引，唯一约束
+ALTER TABLE t_admin ADD UNIQUE INDEX (`login_acct`);

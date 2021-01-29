@@ -38,6 +38,7 @@ public class TestController {
 	public String testService(ModelMap modelMap){		
 		List<Admin> lists= adminService.getAll();
 		modelMap.addAttribute("adminList",lists);
+		System.out.println(10/0);
 		return "target";
 	}
 }

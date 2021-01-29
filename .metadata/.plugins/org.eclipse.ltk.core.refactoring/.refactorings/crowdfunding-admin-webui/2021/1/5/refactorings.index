@@ -5,3 +5,8 @@
 1611840958707	Move 'index.jsp' to 'WEB-INF'
 1611840968830	Move 'index.jsp' to 'webapp'
 1611841200907	Delete element
+1611885025125	Rename resource 'sysetm-error.jsp'
+1611900770421	Delete element
+1611906111858	Delete element
+1611906120407	Move 'pagination.css' to 'css'
+1611906132220	Delete element

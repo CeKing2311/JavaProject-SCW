@@ -1,0 +1,10 @@
+package com.ceking.crowd.exception;
+
+/**
+ * 登录失败抛出异常
+ * @author cjq
+ *
+ */
+public class LoginFailedException {
+
+}

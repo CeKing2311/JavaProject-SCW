@@ -1,0 +1,13 @@
+package com.ceking.crowd.exception;
+
+/**
+ * 登录失败抛出异常
+ * @author cjq
+ *
+ */
+public class LoginFailedException extends RuntimeException {
+	
+	private static final long serialVersionUID=1L;
+	
+
+}

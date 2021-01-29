@@ -1,0 +1,14 @@
+package com.ceking.crowd.config;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
+@ControllerAdvice
+public class CrowdExceptionResolver {
+	
+	@ExceptionHandler(value=NullPointerException.class);
+	public ModelAndView resolveNullPointerException() {
+		return null;
+	}
+}

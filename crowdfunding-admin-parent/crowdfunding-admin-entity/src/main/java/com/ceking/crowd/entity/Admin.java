@@ -2,7 +2,7 @@ package com.ceking.crowd.entity;
 
 public class Admin {
     private Integer id;
-
+    
     private String loginAcct;
 
     private String userPswd;

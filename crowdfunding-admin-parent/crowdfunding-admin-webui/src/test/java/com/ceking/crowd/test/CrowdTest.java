@@ -17,7 +17,7 @@ import com.ceking.crowd.entity.Admin;
 import com.ceking.crowd.mapper.AdminMapper;
 import com.ceking.crowd.service.api.AdminService;
 
-//SpringÕûºÏJunit
+//Springï¿½ï¿½ï¿½ï¿½Junit
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-persist-mybatis.xml","classpath:spring-persisit-tx.xml" })
 public class CrowdTest {
@@ -33,8 +33,12 @@ public class CrowdTest {
 	
 	@Test
 	public void testAdminTx(){
-		Admin admin = new Admin(null, "Jerry", "Jerry", "¹ÜÀíÔ±", "Jerry@qq.com", null);
-		adminService.saveAdmin(admin);		
+		
+		for (int i = 0; i < 1000; i++) {
+			Admin admin = new Admin(null, "Jerry"+i, "123456", "Jerry"+i, "Jerry"+i+"@qq.com", null);
+			adminService.saveAdmin(admin);		
+		}		
+		
 	}
 	
 	@Test
@@ -49,9 +53,9 @@ public class CrowdTest {
 	
 	@Test
 	public void testAdmin() {
-		Admin admin = new Admin(null, "tom", "tom", "¹ÜÀíÔ±", "tom@qq.com", null);
+		Admin admin = new Admin(null, "tom", "tom", "ï¿½ï¿½ï¿½ï¿½Ô±", "tom@qq.com", null);
 		int count = adminMapper.insert(admin);
-		System.out.println("******ÊÜÓ°ÏìµÄÐÐÊý:" + count);
+		System.out.println("******ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + count);
 	}
 
 	@Test

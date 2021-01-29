@@ -1,0 +1,28 @@
+package com.ceking.crowd.mvc.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ceking.crowd.contant.CrowdConstant;
+import com.ceking.crowd.entity.Admin;
+import com.ceking.crowd.service.api.AdminService;
+
+@Controller
+public class AdminController {
+
+	@Autowired
+	private AdminService adminService;
+
+	@RequestMapping("/admin/do/login.html")
+	public String doLogin(@RequestParam("loginAcct") String loginAcct, @RequestParam("userPass") String userPass,
+			HttpSession session) {
+
+		Admin admin = adminService.getAdminByLoginAcct(loginAcct, userPass);
+		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
+		return "admin-main";
+	}
+}
