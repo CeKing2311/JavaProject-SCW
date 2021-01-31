@@ -1,4 +1,0 @@
-jdbc.user=root
-jdbc.password=CeKing2311
-jdbc.url=jdbc:mysql://192.168.1.151:3306/project_crowd?useUnicode=true&characterEncoding=UTF-8
-jdbc.driver=com.mysql.jdbc.Driver

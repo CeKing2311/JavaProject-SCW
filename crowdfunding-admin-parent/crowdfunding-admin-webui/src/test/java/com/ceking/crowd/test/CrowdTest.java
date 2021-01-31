@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ceking.crowd.entity.Admin;
 import com.ceking.crowd.mapper.AdminMapper;
 import com.ceking.crowd.service.api.AdminService;
+import com.ceking.crowd.util.CrowdUtil;
 
 //Spring����Junit
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,11 +35,10 @@ public class CrowdTest {
 	@Test
 	public void testAdminTx(){
 		
-		for (int i = 0; i < 1000; i++) {
-			Admin admin = new Admin(null, "Jerry"+i, "123456", "Jerry"+i, "Jerry"+i+"@qq.com", null);
+		for (int i = 0; i < 100; i++) {
+			Admin admin = new Admin(null, "Marry"+i,CrowdUtil.md5Encryption( "123456"), "Marry"+i, "Marry"+i+"@qq.com", null);
 			adminService.saveAdmin(admin);		
-		}		
-		
+		}
 	}
 	
 	@Test

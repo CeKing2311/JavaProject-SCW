@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,32 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
-
+	
+	/**
+	 * 更新用户
+	 * @param admin
+	 * @param pageNum
+	 * @param keyWord
+	 * @return
+	 */
+	@RequestMapping("admin/update.html")
+	public String updateAdmin(Admin admin
+			,@RequestParam("pageNum") Integer pageNum 
+			,@RequestParam(name="keyWord",value="")String keyWord){
+		
+		adminService.updateAdmin(admin);
+		
+		return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyWord="+keyWord;
+	}
+	
+	@RequestMapping("/admin/to/edit/page.html")
+	public String toEditPage(@RequestParam("adminId") Integer adminId,
+							 ModelMap modelMap){
+		Admin admin=adminService.getAdminById(adminId);
+		modelMap.addAttribute("admin",admin);
+		return "admin-edit";
+	}
+	
 	/**
 	 * 添加用户
 	 * @param admin

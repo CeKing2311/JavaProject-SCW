@@ -1,5 +1,0 @@
-package com.ceking.crowd.mvc.interceptor;
-
-public class LoginInterceptor {
-
-}

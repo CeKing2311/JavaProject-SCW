@@ -1,5 +1,0 @@
-package com.ceking.crowd.config;
-
-public class CrowdExceptionResolver {
-
-}
