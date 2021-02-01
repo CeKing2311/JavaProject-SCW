@@ -2,7 +2,7 @@ CREATE DATABASE `project_crowd` CHARACTER SET utf8;
 
 USE project_crowd;
 
-DROP TABLE IF EXISTS t_admin;
+DROP TABLE IF EXISTS t_admin;project_crowd
 #创建管理员数据库表
 CREATE TABLE t_admin(
 	id INT NOT NULL AUTO_INCREMENT, # 主键
