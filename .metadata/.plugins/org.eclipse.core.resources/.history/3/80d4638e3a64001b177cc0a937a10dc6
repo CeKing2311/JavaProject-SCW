@@ -1,0 +1,20 @@
+package com.ceking.crowd.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ceking.crowd.entity.Role;
+import com.ceking.crowd.mapper.RoleMapper;
+import com.ceking.crowd.service.api.RoleService;
+import com.github.pagehelper.PageInfo;
+
+public class RoleServiceImpl implements RoleService {
+	
+	@Autowired
+	private RoleMapper roleMapper;
+
+	public PageInfo<Role> getPageInfo(String keyWord, Integer pageNum, Integer pageSize) {
+		
+		return null;
+	}
+
+}

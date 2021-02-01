@@ -1,0 +1,5 @@
+package com.ceking.crowd.service.api;
+
+public interface RoleService {
+
+}

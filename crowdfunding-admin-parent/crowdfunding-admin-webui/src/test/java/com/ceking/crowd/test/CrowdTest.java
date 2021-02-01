@@ -14,8 +14,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ceking.crowd.entity.Admin;
+import com.ceking.crowd.entity.Role;
 import com.ceking.crowd.mapper.AdminMapper;
+import com.ceking.crowd.mapper.RoleMapper;
 import com.ceking.crowd.service.api.AdminService;
+import com.ceking.crowd.service.api.RoleService;
 import com.ceking.crowd.util.CrowdUtil;
 
 //Spring����Junit
@@ -31,6 +34,19 @@ public class CrowdTest {
 
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private RoleMapper roleMapper;
+	
+	
+	@Test
+	public void testRole() {
+		for (int i = 0; i < 63; i++) {
+			Role role =new Role(null, "role"+i);
+			roleMapper.insert(role);
+		}
+	}
 	
 	@Test
 	public void testAdminTx(){

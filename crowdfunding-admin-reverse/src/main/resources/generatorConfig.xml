@@ -2,7 +2,8 @@
 PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<!-- mybatis-generator:generate -->
+
+	<!-- 逆向工程生成命令： mybatis-generator:generate -->
 	<context id="cekingTables" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<!-- 是否去除自动生成的注释 true:是;false:否 -->
@@ -40,6 +41,6 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 数据库表名字和我们的 entity 类对应的映射指定 -->
-		<table tableName="t_admin" domainObjectName="Admin" />
+		<table tableName="t_menu" domainObjectName="Menu" />
 	</context>
 </generatorConfiguration>

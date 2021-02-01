@@ -29,9 +29,14 @@
 	</bean>
 	<!-- 配置view-controller，直接把请求地址和视图管理起来，不写handler -->
 	<mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
+	<!-- 首页 -->
 	<mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"/>
-	
+	<!-- 添加用户 -->	
 	<mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
+	<!-- 角色页面 -->
+	<mvc:view-controller path="/role/to/page.html" view-name="views/role/role-page"/>
+	
+	<mvc:view-controller path="/menu/to/page.html" view-name="views/menu/menu-page"/>
 	
 	<!-- 注册拦截器 -->
 	<mvc:interceptors>

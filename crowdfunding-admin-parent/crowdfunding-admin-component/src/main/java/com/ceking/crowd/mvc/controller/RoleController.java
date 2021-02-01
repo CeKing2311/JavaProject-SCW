@@ -1,0 +1,65 @@
+package com.ceking.crowd.mvc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ceking.crowd.entity.Role;
+import com.ceking.crowd.service.api.RoleService;
+import com.ceking.crowd.util.ResultEntity;
+import com.github.pagehelper.PageInfo;
+
+@Controller
+public class RoleController {
+
+	@Autowired
+	private RoleService roleService;
+	
+	
+	@ResponseBody
+	@RequestMapping("/role/deleteBatch.json")
+	public ResultEntity<String> deleteRoleBatch(@RequestBody List<Integer> idList){
+		System.out.println("roleArray:"+idList);
+		roleService.deleteBatch(idList);
+		return ResultEntity.successWithoutData();
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/delete.json")
+	public ResultEntity<String> deleteRole(Integer id){
+		roleService.delete(id);
+		return ResultEntity.successWithoutData();
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/save.json")
+	public ResultEntity<String> saveRole(Role role) {
+		if (role.getId()!=0) {
+			//编辑
+			roleService.update(role);
+		}else if(role.getId()==0){
+			//新增
+			roleService.save(role);
+		}
+		ResultEntity<String> resultEntity = ResultEntity.successWithoutData();
+		System.out.println("保存结果："+resultEntity);
+		return resultEntity;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/get/page/info.json")
+	public ResultEntity<PageInfo<Role>> getPageInfo(@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
+			@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNum,
+			@RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
+		PageInfo<Role> pageInfo = roleService.getPageInfo(keyWord, pageNum, pageSize);
+		
+		return ResultEntity.successWithData(pageInfo);
+	}
+
+}
