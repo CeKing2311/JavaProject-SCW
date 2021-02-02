@@ -1,0 +1,5 @@
+package org.springframework.security.web.authentication.rememberme;
+
+public class JdbcTokenRepositoryImpl {
+
+}

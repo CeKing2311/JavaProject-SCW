@@ -1,0 +1,5 @@
+package com.ceking.security.entity;
+
+public class Admin {
+
+}

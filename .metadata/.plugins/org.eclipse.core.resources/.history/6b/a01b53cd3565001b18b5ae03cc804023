@@ -1,9 +1,0 @@
-package com.ceking.security.config;
-
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-@Enable
-public class WebAppSecurityConfig   {
-
-}

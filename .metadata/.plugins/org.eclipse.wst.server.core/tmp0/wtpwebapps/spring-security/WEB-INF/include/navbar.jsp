@@ -33,7 +33,10 @@
 				</dd>
 			</dl></li>
 		<li class="layui-nav-item">
-			<form id="logoutForm" action="${pageContext.request.contextPath }/my/app/logout" method="post">
+			<!-- 禁用CSRF功能的前提下，最简单的退出方式 -->			
+			<%-- <a href="${pageContext.request.contextPath }/do/logout.html">退出</a> --%>
+			
+			 <form id="logoutForm" action="${pageContext.request.contextPath }/do/logout.html" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
 			<a id="logoutAnchor" href="">退出</a>
@@ -49,7 +52,7 @@
 					};
 					
 				};
-			</script>
+			</script> 
 		</li>
 	</ul>
 </div>

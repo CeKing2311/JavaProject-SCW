@@ -1,0 +1,17 @@
+package com.ceking.security.config;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class MyUserDetailService implements UserDetailsService {
+
+	//根据表单提交的用户名查询User对象，并装配角色、权限等信息
+	@Override
+	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
+		
+		
+		return null;
+	}
+
+}

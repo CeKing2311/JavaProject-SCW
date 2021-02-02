@@ -1,8 +1,0 @@
-package com.ceking.crowd.mvc.controller;
-
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class AssignController {
-
-}

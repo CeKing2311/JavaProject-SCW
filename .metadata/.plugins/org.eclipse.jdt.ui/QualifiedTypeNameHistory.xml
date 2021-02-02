@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-<fullyQualifiedTypeName name="org.springframework.ui.Model"/>
-<fullyQualifiedTypeName name="com.ceking.crowd.entity.Admin"/>
-<fullyQualifiedTypeName name="org.springframework.dao.DuplicateKeyException"/>
-<fullyQualifiedTypeName name="com.ceking.crowd.exception.LoginAcctDuplicateException"/>
-<fullyQualifiedTypeName name="com.ceking.crowd.contant.CrowdConstant"/>
-<fullyQualifiedTypeName name="com.ceking.crowd.util.CrowdUtil"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="javax.swing.event.RowSorterListener"/>
-<fullyQualifiedTypeName name="com.github.pagehelper.PageHelper"/>
-<fullyQualifiedTypeName name="com.github.pagehelper.PageInfo"/>
-<fullyQualifiedTypeName name="com.ceking.crowd.mapper.RoleMapper"/>
-<fullyQualifiedTypeName name="org.junit.Test"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.xml.DelegatingEntityResolver"/>
 <fullyQualifiedTypeName name="java.lang.Void"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.entity.RoleExample"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.mapper.MenuMapper"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.service.api.MenuService"/>
@@ -42,7 +27,6 @@
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.entity.Auth"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.service.api.AuthService"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.entity.AuthExample"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
@@ -51,7 +35,6 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
 <fullyQualifiedTypeName name="com.ceking.crowd.util.ResultEntity"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
@@ -60,4 +43,21 @@
 <fullyQualifiedTypeName name="com.ceking.spring.entity.Employee"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
 <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.EnableWebSecurity"/>
+<fullyQualifiedTypeName name="com.ceking.crowd.util.CrowdUtil"/>
+<fullyQualifiedTypeName name="org.springframework.security.web.access.AccessDeniedHandler"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.support.JdbcDaoSupport"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.JdbcTemplate"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.BeanPropertyRowMapper"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.ceking.security.entity.Admin"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.GrantedAuthority"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="com.ceking.security.config.MyUserDetailService"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 </qualifiedTypeNameHistroy>

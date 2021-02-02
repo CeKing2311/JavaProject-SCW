@@ -1,0 +1,102 @@
+package com.ceking.security.config;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+
+@Configuration
+//启动web环境下权限控制功能
+@EnableWebSecurity  
+public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private DataSource dataSource;
+	
+	
+	//权限验证
+	@Override
+	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+		builder
+			.inMemoryAuthentication()	//在内存中完成账号密码的检查
+			.withUser("admin")			//指定账号
+			.password("123456")			//指定密码
+			.roles("ADMIN","学徒")				//指定当前用户的角色
+			.and()
+			.withUser("tom")
+			.password("123456")
+			.authorities("UPDATE","内门弟子" )		//指定当前用户的权限		
+			;
+			
+	}
+	
+	@Override
+	protected void configure(HttpSecurity security) throws Exception {
+		
+		JdbcTokenRepositoryImpl tokenRepository= new JdbcTokenRepositoryImpl();
+		tokenRepository.setDataSource(dataSource);
+		//tokenRepository.setCreateTableOnStartup(true);
+		
+		security
+			.authorizeRequests()    	//对请求进行授权
+			.antMatchers("/index.jsp")	//针对 /index.jsp进行授权
+			.permitAll()				//可用无条件访问
+			.antMatchers("/layui/**")   //针对 layui目录下进行授权
+			.permitAll()				//可用无条件访问
+			.antMatchers("/level1/**").hasRole("学徒") //针对level1,必须有学徒角色
+			.antMatchers("/level2/**").hasAuthority("内门弟子") //针对level2,必须有内门弟子 权限才可用访问
+			.and()							
+			.authorizeRequests()		//对请求进行授权
+			.anyRequest()				//任意请求
+			.authenticated()			//需要登录以后才可用访问
+			.and()
+			.formLogin()
+			// /index.jsp GET 去登录页面
+			// /index.jsp POST  提交登录表单
+			// /index.jsp？error GET  登录失败
+			// /index.jsp？logout GET  退出登录
+			.loginPage("/index.jsp")   	//指定登录页面，如果没有指定会默认访问security默认登录页
+			.loginProcessingUrl("/do/login.html") //指定登录表单的地址，覆盖loginPage设置默认值		
+			//.permitAll()				//登录地址进行放行
+			.usernameParameter("loginAcct") //登录账号的请求参数名
+			.passwordParameter("userPswd")  //登录密码的请求参数名
+			.defaultSuccessUrl("/main.html") //登录成功后去往的地址
+			.and()
+			.csrf()			//禁用csrf功能
+			.disable()
+			.logout()
+			.logoutUrl("/do/logout.html")
+			.logoutSuccessUrl("/index.jsp")
+			.and()
+			.exceptionHandling() 		//指定异常处理
+			//.accessDeniedPage("/to/no/auth/page.html")	//访问被拒绝时前往的页面
+			.accessDeniedHandler(new AccessDeniedHandler() {
+				//自定义页面
+				@Override
+				public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception)
+						throws IOException, ServletException {
+					request.setAttribute("message", "抱歉，你没有访问的请权限!");
+					request.getRequestDispatcher("/WEB-INF/views/no_auth.jsp").forward(request, response);
+					
+				}
+			})
+			.and()
+			.rememberMe() 	//开启记住我功能
+			.tokenRepository(tokenRepository)
+			;
+		
+	}
+	
+}
