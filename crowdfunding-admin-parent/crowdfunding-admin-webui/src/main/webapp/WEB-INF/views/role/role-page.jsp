@@ -5,6 +5,7 @@
 
 <%@ include file="/WEB-INF/include-head.jsp"%>
 <link rel="stylesheet" href="css/pagination.css">
+<link rel="stylesheet" href="ztree/zTreeStyle.css">
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <body>
 
@@ -97,6 +98,8 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/assign/assign-auth.jsp"%>
+	<script src="ztree/jquery.ztree.all-3.5.min.js"></script>
 	<script type="text/javascript" src="crowd/role-page.js"></script>
 	<script type="text/javascript">
 		$(function() {
@@ -109,10 +112,53 @@
 				window.keyWord = keyWord;
 				generatePage();
 			})
+			//选中按钮
+			$(".chkBtn").on("click",function(){
+				
+				$("#assignAuthModal").modal("show");
+				window.roleId = $(this).attr("id");
+				fillAuthTree();
+			})
+			//保存权限分配
+			$("#authSaveBtn").click(function(){
+				//获取勾选的节点id
+				var authIdArray =[];
+				var treeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+				var nodes = treeObj.getCheckedNodes();
+				
+				for(var i=0;i<nodes.length;i++){
+					var authId = nodes[i].id;
+					authIdArray.push(authId);
+				}
+				var postData= {
+					authIdArray :authIdArray,
+					roleId : [window.roleId]
+				};
+				postData = JSON.stringify(postData);
+				$.ajax({
+					url:"assign/do/role/assign/auth.json",
+					type:"post",
+					data:postData,
+					contentType:"application/json;charset=UTF-8",
+					dataType:"json",
+					success:function(res){
+						if (res.result == "SUCCESS") {
+							layer.msg("保存成功！");
+							$("#assignAuthModal").modal("hide");
+						}						
+					},
+					error:function(err){
+						layer.msg(err);
+					}
+				})
+			})					
+			
 			$("#showAddModel").click(function() {
 				$("#myModalLabel").html("新增角色");
 				$("#myModal").modal("show");
 			})
+			
+			
 			$("#btnSave").click(function() {
 				var postData = {
 					id : $("#roleId").val(),
@@ -176,7 +222,6 @@
 					return ;
 				}
 				var postData = JSON.stringify(roleArray);
-				console.log(postData)
 				$.ajax({
 					url : "role/deleteBatch.json",
 					type : "post",

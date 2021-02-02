@@ -2,17 +2,15 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="com.ceking.crowd"/>
+			<item value="com.ceking.arowd"/>
+			<item value="com."/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="crowdfunding-admin-reverse"/>
-			<item value="crowdfunding-admin-util"/>
-			<item value="crowdfunding-admin-parent"/>
-			<item value="crowdfunding-admin-entity"/>
-			<item value="cr"/>
-			<item value="crowdfunding-admin-component"/>
+			<item value="spring-security"/>
+			<item value="spring-annotation"/>
+			<item value="com."/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -57,6 +55,7 @@
 	</section>
 	<section name="MavenModuleWizardParentPage">
 		<list key="moduleName">
+			<item value="com."/>
 			<item value="crowdfunding-admin-util"/>
 			<item value="crowdfunding-admin-entity"/>
 			<item value="cr"/>

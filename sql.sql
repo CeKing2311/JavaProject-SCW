@@ -71,6 +71,33 @@ glyphicon-tags','tag/index.htm');
 INSERT INTO `t_menu` (`id`, `pid`, `name`, `icon`, `url`) VALUES('19','1',' 参 数 管 理 ','glyphicon
 glyphicon-list-alt','param/index.htm');
 
+#Admin和Role关联的中间表
+CREATE TABLE inner_admin_role(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	admin_id INT ,
+	role_id INT 	
+);
+#权限表
+CREATE TABLE t_auth(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  NAME VARCHAR(200) DEFAULT NULL,
+  title VARCHAR(200) DEFAULT NULL,
+  category_id INT(11) DEFAULT NULL  #关联到当前权限所属的分类
+);
+#测试数据
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(1,'','用户模块',NULL);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(2,'user:delete','删除',1);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(3,'user:get','查询',1);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(4,'','角色模块',NULL);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(5,'role:delete','删除',4);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(6,'role:get','查询',4);
+INSERT INTO t_auth(id,`name`,title,category_id) VALUES(7,'role:add','新增',4);
+#角色和权限关联中间表
+CREATE TABLE inner_role_auth(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	role_id INT ,
+	auth_id INT 
+);
 
 
 

@@ -1,0 +1,10 @@
+package com.ceking.crowd.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.ceking.crowd.service.api.AuthService;
+
+@Service
+public class AuthServiceImpl implements AuthService {
+
+}

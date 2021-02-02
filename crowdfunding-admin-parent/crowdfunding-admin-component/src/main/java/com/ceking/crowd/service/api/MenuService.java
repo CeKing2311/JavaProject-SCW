@@ -7,5 +7,11 @@ import com.ceking.crowd.entity.Menu;
 public interface MenuService {
 
 	List<Menu> getAll();
+
+	void save(Menu menu);
+
+	void update(Menu menu);
+
+	void delete(Integer id);
 	
 }

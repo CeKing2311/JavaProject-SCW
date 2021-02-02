@@ -49,12 +49,23 @@ function initTableBody(pageInfo) {
 		var roleId = role.id;
 		var roleName = role.name;
 		var numTd = "<td>" + (i + 1) + "</td>";
-		var chkTd = "<td><input type='checkbox' class='btn-chk-role' dataId='"+roleId+"' dataName='"+roleName+"' ></td>";
+		var chkTd = "<td><input type='checkbox' class='btn-chk-role' dataId='"
+				+ roleId + "' dataName='" + roleName + "' ></td>";
 		var nameTd = "<td>" + roleName + "</td>";
 
-		var chkBtn = '<button type="button" class="btn btn-success btn-xs"> <i class=" glyphicon glyphicon-check"></i></button>&nbsp;';
-		var editBtn = '<button type="button" onclick="editRole('+roleId+',\''+roleName+'\')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>&nbsp;'
-		var delBtn = '<button type="button" onclick="delRole('+roleId+',\''+roleName+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>&nbsp;';
+		var chkBtn = '<button id="'
+				+ roleId
+				+ '" type="button" class="btn btn-success btn-xs chkBtn"> <i class=" glyphicon glyphicon-check"></i></button>&nbsp;';
+		var editBtn = '<button type="button" onclick="editRole('
+				+ roleId
+				+ ',\''
+				+ roleName
+				+ '\')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>&nbsp;'
+		var delBtn = '<button type="button" onclick="delRole('
+				+ roleId
+				+ ',\''
+				+ roleName
+				+ '\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>&nbsp;';
 		var btnTd = "<td style='width:150px;'>" + chkBtn + editBtn + delBtn
 				+ "</td>";
 
@@ -81,8 +92,87 @@ function generateNavigator(pageInfo) {
 function paginationCallBack(pageIndex, jQuery) {
 	// 根据 page_index 计算 pageNum
 	window.pageNum = pageIndex + 1;
-	
+
 	generatePage();
-	//取消超链接的跳转行为
+	// 取消超链接的跳转行为
 	return false;
+}
+// 权限分配
+function fillAuthTree() {
+	// 1.查询数据
+	var ajaxResult = $.ajax({
+		url : "assign/get/all/auth.json",
+		type : "post",
+		async : false,
+		dataType : "json",
+	});
+	console.log(ajaxResult);
+	var statusCode = ajaxResult.status;
+	var statusMsg = ajaxResult.statusText;
+	if (statusCode != 200) {
+		layer.msg("服务器响应失败！状态码：" + statusCode + ";响应信息：" + statusMsg);
+		return;
+	}
+	var resultEntity = ajaxResult.responseJSON;
+	var result = resultEntity.result;
+	if (result == "FAILED") {
+		// 请求失败
+		layer.msg(resultEntity.messgae);
+		return;
+	}
+	var authData = resultEntity.data;
+	// ztree 配置
+	var setting = {
+		data : {
+			// 开启简单json功能
+			simpleData : {
+				enable : true,
+				pIdKey : "categoryId",
+			},
+			key : {
+				name : "title"
+			}
+		},
+		check : {
+			enable : true,
+			//chkboxType : { "Y": "p", "N": "s" }
+		}
+
+	}
+	// 生成权限树形结构
+	$.fn.zTree.init($("#authTreeDemo"), setting, authData);
+	// 获取zTreeObj对象
+	var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+	// 展开所有节点
+	zTreeObj.expandAll("tree");
+
+	// 查询已分配的auth的id
+	var ajaxAuthRes = $.ajax({
+		url : "assign/get/assigned/auth/role/id.json",
+		type : "post",
+		data : {
+			roleId : window.roleId
+		},
+		async : false,
+		dataType : "json",
+	});
+	console.log("window.roleId"+window.roleId);
+	if (ajaxAuthRes.status != 200) {
+		layer.msg("服务器响应失败！状态码：" + ajaxAuthRes.status + ";响应信息："
+				+ ajaxAuthRes.statusText);
+		return;
+	}
+	var authIdArray = ajaxAuthRes.responseJSON.data;
+
+	// 把树形结构中已分配的权限勾选上
+	for (var i = 0; i < authIdArray.length; i++) {
+		var authId = authIdArray[i];
+		//获取节点
+		var treeNode = zTreeObj.getNodeByParam("id", authId);
+		//选中节点
+		var checked= true;  //勾选节点
+		var checkTypeFlag = false;  //勾选时不联动
+		zTreeObj.checkNode(treeNode,checked,checkTypeFlag);
+	}
+
 }

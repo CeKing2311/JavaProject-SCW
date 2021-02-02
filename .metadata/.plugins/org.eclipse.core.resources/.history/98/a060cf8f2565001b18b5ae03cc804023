@@ -1,0 +1,259 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<%@ include file="/WEB-INF/include-head.jsp"%>
+<link rel="stylesheet" href="css/pagination.css">
+<link rel="stylesheet" href="ztree/zTreeStyle.css">
+<script type="text/javascript" src="jquery/jquery.pagination.js"></script>
+<body>
+
+	<%@ include file="/WEB-INF/include-nav.jsp"%>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<%@ include file="/WEB-INF/include-slidebar.jsp"%>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="glyphicon glyphicon-th"></i> 数据列表
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form class="form-inline" role="form" style="float: left;">
+							<div class="form-group has-feedback">
+								<div class="input-group">
+									<div class="input-group-addon">查询条件</div>
+									<input class="form-control has-success" id="keyWord"
+										type="text" placeholder="请输入查询条件">
+								</div>
+							</div>
+							<button type="button" id="btnSearch" class="btn btn-warning">
+								<i class="glyphicon glyphicon-search"></i> 查询
+							</button>
+						</form>
+						<button type="button" class="btn btn-danger" id="batchRemove"
+							style="float: right; margin-left: 10px;">
+							<i class=" glyphicon glyphicon-remove"></i> 删除
+						</button>
+						<button type="button" class="btn btn-primary" id="showAddModel"
+							style="float: right;">
+							<i class="glyphicon glyphicon-plus"></i> 新增
+						</button>
+						<br>
+						<hr style="clear: both;">
+						<div class="table-responsive">
+							<table class="table  table-bordered">
+								<thead>
+									<tr>
+										<th width="30">#</th>
+										<th width="30"><input type="checkbox" id="chkAll"></th>
+										<th>名称</th>
+										<th width="100">操作</th>
+									</tr>
+								</thead>
+								<tbody id="rolePageBody">
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="6" align="center">
+											<div id="Pagination" class="pagination"></div>
+										</td>
+									</tr>
+
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新增角色</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="roleId">
+					<div class="form-group">
+						<label for="exampleInputPassword1">角色名称</label> <input type="text"
+							class="form-control" id="roleName" placeholder="请输入角色名称">
+					</div>
+					<button type="button" id="btnSave" class="btn btn-success">
+						<i class="glyphicon glyphicon-plus"></i> 保存
+					</button>
+					<button type="reset" class="btn btn-danger">
+						<i class="glyphicon glyphicon-refresh"></i> 重置
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%@ include file="/WEB-INF/views/assign/assign-auth.jsp"%>
+	<script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+	<script type="text/javascript" src="crowd/role-page.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			window.pageNum = 1;
+			window.pageSize = 5;
+			window.keyWord = "";
+			generatePage();
+			$("#btnSearch").click(function() {
+				var keyWord = $("#keyWord").val();
+				window.keyWord = keyWord;
+				generatePage();
+			})
+			//选中按钮
+			$(".chkBtn").on("click",function(){
+				
+				$("#assignAuthModal").modal("show");
+				window.roleId = $(this).attr("id");
+				fillAuthTree();
+			})
+			$("#authSaveBtn").click(function(){
+				//获取勾选的节点id
+				var authIdArray =[];
+				var treeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+				var nodes = treeObj.getCheckedNodes();
+				console.log(nodes);
+				for(var i=0;i<nodes.length;i++){
+					var authId = nodes[i].id;
+					authIdArray.push(authId);
+				}
+				
+			})
+					
+			
+			$("#showAddModel").click(function() {
+				$("#myModalLabel").html("新增角色");
+				$("#myModal").modal("show");
+			})
+			
+			
+			$("#btnSave").click(function() {
+				var postData = {
+					id : $("#roleId").val(),
+					name : $("#roleName").val()
+				};
+				if (postData.id == "") {
+					//新增
+					postData.id = 0;
+					window.pageNum = 99999;
+				}
+				$.ajax({
+					url : "role/save.json",
+					type : "post",
+					data : postData,
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+						if (result.result == "SUCCESS") {
+							layer.msg("保存成功！");
+							
+							generatePage();
+						}
+					},
+					error : function(err) {
+						//console.log(err);
+						layer.msg(err);
+					}
+				});
+				$("#myModal").modal("hide");
+				//清理模态框
+				$("#roleName").val("");
+				$("#roleId").val("");
+			});
+			$("#chkAll").click(function(){
+				var status = this.checked;
+				$(".btn-chk-role").prop("checked",status);				
+			});
+			$(".btn-chk-role").click(function(){
+				//已选中的数量
+				var chkBoxCount = $(".btn-chk-role:checked").length;
+				//全部的数量
+				var totalChkBoxCount = $(".btn-chk-role").length;
+				
+				$("#chkAll").prop("checked",(chkBoxCount==totalChkBoxCount?true:false));								
+			});
+			$("#batchRemove").click(function(){
+				var roleArray=[];
+				$(".btn-chk-role").each(function(){
+					if(this.checked){
+						//var name = this.dataName;
+						var id = $(this).attr("dataId");
+						roleArray.push(id);
+						/* roleArray.push({
+							id:id,
+							name:name
+						}); */
+					}
+				})
+				if(roleArray.length==0){
+					layer.msg("请选择要删除的角色！");
+					return ;
+				}
+				var postData = JSON.stringify(roleArray);
+				$.ajax({
+					url : "role/deleteBatch.json",
+					type : "post",
+					data :postData,
+					contentType:"application/json;charset=UTF-8",
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+						if (result.result == "SUCCESS") {
+							layer.msg("删除成功！");
+							generatePage();
+						}
+					},
+					error : function(err) {
+						layer.msg(err);
+					}
+				});
+			})			
+		})
+		function editRole(id, name) {
+			$("#roleId").val(id);
+			$("#roleName").val(name);
+			$("#myModalLabel").html("编辑角色");
+			$("#myModal").modal("show");
+		}
+		function delRole(id, name) {
+			var postData = {
+				id : id
+			};
+			layer.confirm('确定要删除角色【' + name + '】吗？', {
+				icon : 3,
+				title : '提示'
+			}, function(index) {
+				$.ajax({
+					url : "role/delete.json",
+					type : "post",
+					data : postData,
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+						if (result.result == "SUCCESS") {
+							layer.msg("删除成功！");
+							generatePage();
+						}
+					},
+					error : function(err) {
+						layer.msg(err);
+					}
+				});
+				layer.close(index);
+			});
+		}
+	</script>
+</body>
+</html>

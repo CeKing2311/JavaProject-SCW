@@ -15,4 +15,10 @@ public interface RoleService {
 	void delete(Integer id);
 	
 	void deleteBatch(List<Integer> idList);
+
+	List<Role> getAssignedRole(Integer adminId);
+
+	List<Role> getUnAssignedRole(Integer adminId);
+	
+	void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
 }

@@ -1,0 +1,242 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div id="assignAuthModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">添加菜单</h4>
+			</div>
+			<form>
+				<div class="modal-body">
+					请输入节点名称：<input type="text" name="name" /><br />
+					请输入URL地址：<input type="text" name="url" /><br />
+					<i class="glyphicon glyphicon-th-list"></i>
+					<input type="radio" name="icon" value="glyphicon glyphicon-th-list" />&nbsp;
+					
+					<i class="glyphicon glyphicon-dashboard"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-dashboard" /> &nbsp;
+					
+					<i class="glyphicon glyphicon glyphicon-tasks"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon glyphicon-tasks" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-user"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-user" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-king"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-king" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-lock"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-lock" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-ok"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-ok" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-check"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-check" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-th-large"></i>
+					<input type="radio" name="icon" value="glyphicon glyphicon-th-large" /> <br /> 
+					
+					<i class="glyphicon glyphicon-picture"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-picture" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-equalizer"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-equalizer" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-random"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-random" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-hdd"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-hdd" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-comment"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-comment" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-list"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-list" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-tags"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-tags" /> &nbsp;
+					
+					<i class="glyphicon glyphicon-list-alt"></i> 
+					<input type="radio" name="icon" value="glyphicon glyphicon-list-alt" /> &nbsp;
+					<br />
+					
+				</div>
+				<div class="modal-footer">
+					<button id="menuSaveBtn" type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> 保存</button>
+					<button id="menuResetBtn" type="reset" class="btn btn-primary"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var setting = {
+			check : {
+				enable : true
+			},
+			view : {
+				selectedMulti : false,
+				addDiyDom : function(treeId, treeNode) {
+					var icoObj = $("#" + treeNode.tId + "_ico"); // tId = permissionTree_1, $("#permissionTree_1_ico")
+					if (treeNode.icon) {
+						icoObj.removeClass("button ico_docu ico_open")
+								.addClass("fa fa-fw " + treeNode.icon).css(
+										"background", "");
+					}
+				},
+			},
+			async : {
+				enable : true,
+				url : "tree.txt",
+				autoParam : [ "id", "name=n", "level=lv" ]
+			},
+			callback : {
+				onClick : function(event, treeId, json) {
+
+				}
+			}
+		};
+		//$.fn.zTree.init($("#treeDemo"), setting); //异步访问数据
+
+		var d = [ {
+			"id" : 1,
+			"pid" : 0,
+			"seqno" : 0,
+			"name" : "系统权限菜单",
+			"url" : null,
+			"icon" : "fa fa-sitemap",
+			"open" : true,
+			"checked" : false,
+			"children" : [ {
+				"id" : 2,
+				"pid" : 1,
+				"seqno" : 0,
+				"name" : "控制面板",
+				"url" : "dashboard.htm",
+				"icon" : "fa fa-desktop",
+				"open" : true,
+				"checked" : false,
+				"children" : []
+			}, {
+				"id" : 6,
+				"pid" : 1,
+				"seqno" : 1,
+				"name" : "消息管理",
+				"url" : "message/index.htm",
+				"icon" : "fa fa-weixin",
+				"open" : true,
+				"checked" : false,
+				"children" : []
+			}, {
+				"id" : 7,
+				"pid" : 1,
+				"seqno" : 1,
+				"name" : "权限管理",
+				"url" : "",
+				"icon" : "fa fa-cogs",
+				"open" : true,
+				"checked" : false,
+				"children" : [ {
+					"id" : 8,
+					"pid" : 7,
+					"seqno" : 1,
+					"name" : "用户管理",
+					"url" : "user/index.htm",
+					"icon" : "fa fa-user",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				}, {
+					"id" : 9,
+					"pid" : 7,
+					"seqno" : 1,
+					"name" : "角色管理",
+					"url" : "role/index.htm",
+					"icon" : "fa fa-graduation-cap",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				}, {
+					"id" : 10,
+					"pid" : 7,
+					"seqno" : 1,
+					"name" : "许可管理",
+					"url" : "permission/index.htm",
+					"icon" : "fa fa-check-square-o",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				} ]
+			}, {
+				"id" : 11,
+				"pid" : 1,
+				"seqno" : 1,
+				"name" : "资质管理",
+				"url" : "",
+				"icon" : "fa fa-certificate",
+				"open" : true,
+				"checked" : false,
+				"children" : [ {
+					"id" : 12,
+					"pid" : 11,
+					"seqno" : 1,
+					"name" : "分类管理",
+					"url" : "cert/type.htm",
+					"icon" : "fa fa-th-list",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				}, {
+					"id" : 13,
+					"pid" : 11,
+					"seqno" : 1,
+					"name" : "资质管理",
+					"url" : "cert/index.htm",
+					"icon" : "fa fa-certificate",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				} ]
+			}, {
+				"id" : 15,
+				"pid" : 1,
+				"seqno" : 1,
+				"name" : "流程管理",
+				"url" : "process/index.htm",
+				"icon" : "fa fa-random",
+				"open" : true,
+				"checked" : false,
+				"children" : []
+			}, {
+				"id" : 16,
+				"pid" : 1,
+				"seqno" : 1,
+				"name" : "审核管理",
+				"url" : "",
+				"icon" : "fa fa-check-square",
+				"open" : true,
+				"checked" : false,
+				"children" : [ {
+					"id" : 17,
+					"pid" : 16,
+					"seqno" : 1,
+					"name" : "实名认证人工审核",
+					"url" : "process/cert.htm",
+					"icon" : "fa fa-check-circle-o",
+					"open" : true,
+					"checked" : false,
+					"children" : []
+				} ]
+			} ]
+		} ];
+		$.fn.zTree.init($("#treeDemo"), setting, d);
+	});
+</script>

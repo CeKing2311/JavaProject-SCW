@@ -20,11 +20,11 @@ function initTreeNode(){
 							url: "ceking" //找不到此链接就不会进行跳转
 						}
 					},
-					edit:{
+					/*edit:{
 						enable: true,
 						showRenameBtn: true,
 						showRemoveBtn:true 
-					}
+					}*/
 				};
 				//	初始化树形结构					
 				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
@@ -37,22 +37,22 @@ function initTreeNode(){
 //鼠标进入节点范围时显示按钮
 function myAddHoverDom(treeId, treeNode) {
 	// 按钮出现的位置是节点
+	console.log(treeNode);
 	var anchorId = treeNode.tId + "_a";
 	var btnGroupId = treeNode.tId + "_btnGroup";
 	var level = treeNode.level;
-	console.log(treeNode);
-	return ;
+	//console.log(treeNode);
 	if ($("#" + btnGroupId).length == 0) {
 
 		var addBtn = '<span id="'
 				+ btnGroupId
-				+ '" class="button add '+btnGroupId+'"  title="添加节点" onfocus="this.blur();"></span>';
+				+ '" dataid="'+treeNode.id+'" class="button add '+btnGroupId+'"  title="添加节点" onfocus="this.blur();"></span>';
 		var editBtn = '<span  id="'
 				+ btnGroupId
-				+ '" class="button edit '+btnGroupId+'" title="编辑节点" treenode_edit="" style=""></span>';
+				+ '" dataid="'+treeNode.id+'" class="button edit '+btnGroupId+'" title="编辑节点" treenode_edit="" style=""></span>';
 		var delBtn = '<span id="'
 				+ btnGroupId
-				+ '" class="button remove '+btnGroupId+'"  title="删除节点" treenode_remove="" style=""></span>';
+				+ '" dataid="'+treeNode.id+'" class="button remove '+btnGroupId+'"  title="删除节点" treenode_remove="" style=""></span>';
 		var btnHtml = "";
 		if (level == 0) {
 			btnHtml += addBtn;

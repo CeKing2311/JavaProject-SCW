@@ -31,7 +31,6 @@ public class CrowdExceptionResolver {
 	public ModelAndView resolveDuplicateKeyException(LoginAcctDuplicateException exception, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String viewName = "admin-add";
-		System.out.println("viewName=================>:"+viewName);
 		return commonResolve(viewName, exception, request, response);
 	}
 	
