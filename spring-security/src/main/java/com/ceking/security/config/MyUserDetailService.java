@@ -21,20 +21,22 @@ public class MyUserDetailService implements UserDetailsService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	//根据表单提交的用户名查询User对象，并装配角色、权限等信息
+
+	// 根据表单提交的用户名查询User对象，并装配角色、权限等信息
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		//1.使用 SQL 语句根据用户名查询用户对象
+		// 1.使用 SQL 语句根据用户名查询用户对象
 		String sql = "SELECT id,loginacct,userpswd,username,email,createtime FROM t_admin WHERE loginacct = ?";
-		List<Admin> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Admin.class),username);
+		List<Admin> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Admin.class), username);
 		Admin admin = list.get(0);
-		//2.设置角色权限信息
-		List<GrantedAuthority> authorities =new ArrayList<GrantedAuthority>();
+		// 2.设置角色权限信息
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		authorities.add(new SimpleGrantedAuthority("UPDATE"));
-		//3.将admin对象和authorities封装到 UserDetails中
-		String userpswd= admin.getUserpswd();
-		return new User(username,userpswd,authorities);
+
+		// 3.将admin对象和authorities封装到 UserDetails中
+		String userpswd = admin.getUserpswd();
+		return new User(username, userpswd, authorities);
 	}
 
 }

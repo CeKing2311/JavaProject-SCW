@@ -1,0 +1,30 @@
+package com.ceking.crowd.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		//构建角色集合 ，项目中此处应该是根据用户名查询用户的角色列表
+        List<GrantedAuthority> geAuthorities = new ArrayList<GrantedAuthority>();
+        //添加角色ROLE_ADMIN
+        geAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        System.out.println("username:"+username);
+        /**
+         * 第一参数：username
+         * 第二参数："$2a$10$rIxa8dDL8F8Bf.TeC5rOeev96e0wTo0FIuLmtdJ6T/a8CptHlAlga"是BCrypt加密的密码 123456
+         * 第三参数：geAuthorities是它的角色
+         */
+        return new User(username,"$2a$10$kqpHZ2nY1p2cJJ.NbKLazuYH6xAqF1SXOGMyibsJ/Yj7XFQ5miEEK",geAuthorities);
+	}
+	
+
+}

@@ -108,17 +108,6 @@ series VARCHAR (64) PRIMARY KEY,
 token VARCHAR (64) NOT NULL,
 last_used TIMESTAMP NOT NULL
 );
-
-CREATE TABLE t_admin
-(
-id INT NOT NULL AUTO_INCREMENT,
-loginacct VARCHAR(255) NOT NULL,
-userpswd CHAR(32) NOT NULL,
-username VARCHAR(255) NOT NULL,
-email VARCHAR(255) NOT NULL,SECURITY
-createtime CHAR(19),
-PRIMARY KEY (id)
-);
  
 
 ################################################

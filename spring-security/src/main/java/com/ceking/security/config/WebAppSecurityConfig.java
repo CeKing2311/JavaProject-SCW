@@ -8,13 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
@@ -28,6 +30,18 @@ public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private MyUserDetailService userDetailsService;
+	
+	/*@Autowired
+	private MyPasswordEncoder passwordEncoder;*/
+	
+	
+	/*@Autowired
+	private BCryptPasswordEncoder passwordEncoder;*/
+	
+	@Bean
+	public BCryptPasswordEncoder getBCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	//权限验证
 	@Override
@@ -44,7 +58,7 @@ public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
 			;*/
 		
 		builder
-			.userDetailsService(userDetailsService);
+			.userDetailsService(userDetailsService).passwordEncoder(getBCryptPasswordEncoder());
 		
 		
 	}
@@ -54,17 +68,15 @@ public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
 		
 		JdbcTokenRepositoryImpl tokenRepository= new JdbcTokenRepositoryImpl();
 		tokenRepository.setDataSource(dataSource);
-		//tokenRepository.setCreateTableOnStartup(true);
+		tokenRepository.setCreateTableOnStartup(true);
 		
 		security
 			.authorizeRequests()    	//对请求进行授权
-			.antMatchers("/index.jsp")	//针对 /index.jsp进行授权
-			.permitAll()				//可用无条件访问
-			.antMatchers("/layui/**")   //针对 layui目录下进行授权
-			.permitAll()				//可用无条件访问
+			.antMatchers("/index.jsp").permitAll()	//针对 /index.jsp进行授权，可用无条件访问
+			.antMatchers("/layui/**").permitAll()   //针对 layui目录下进行授权 //可用无条件访问
 			.antMatchers("/level1/**").hasRole("学徒") //针对level1,必须有学徒角色
 			.antMatchers("/level2/**").hasAuthority("内门弟子") //针对level2,必须有内门弟子 权限才可用访问
-			.and()							
+			.and()				
 			.authorizeRequests()		//对请求进行授权
 			.anyRequest()				//任意请求
 			.authenticated()			//需要登录以后才可用访问
@@ -83,13 +95,13 @@ public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf()			//禁用csrf功能
 			.disable()
-			.logout()
-			.logoutUrl("/do/logout.html")
-			.logoutSuccessUrl("/index.jsp")
+			.logout()						//开启退出功能
+			.logoutUrl("/do/logout.html")	//退出地址
+			.logoutSuccessUrl("/index.jsp")	//退出后前往的地址
 			.and()
 			.exceptionHandling() 		//指定异常处理
 			//.accessDeniedPage("/to/no/auth/page.html")	//访问被拒绝时前往的页面
-			.accessDeniedHandler(new AccessDeniedHandler() {
+			.accessDeniedHandler(new AccessDeniedHandler() { //访问被拒绝时通过AccessDeniedHandler进行处理
 				//自定义页面
 				@Override
 				public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception)
@@ -100,8 +112,8 @@ public class WebAppSecurityConfig  extends WebSecurityConfigurerAdapter {
 				}
 			})
 			.and()
-			.rememberMe() 	//开启记住我功能
-			.tokenRepository(tokenRepository)
+			.rememberMe() 	//开启记住我功能，表单中提供一个参数名为remember-me的参数即可，一般使用多选框
+			.tokenRepository(tokenRepository) //装配token仓库
 			;
 		
 	}

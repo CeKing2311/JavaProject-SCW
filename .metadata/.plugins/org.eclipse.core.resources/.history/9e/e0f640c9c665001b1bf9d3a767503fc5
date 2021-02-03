@@ -1,0 +1,16 @@
+package com.ceking.spring.security;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class SecurityTest {
+	
+	public static void main(String[] args) {
+		
+		//	1.创建BCryptPasswordEncoder对象
+		BCryptPasswordEncoder passwordEncoder =new BCryptPasswordEncoder();
+		//	2.准备明文字符串
+		
+		
+	}
+
+}

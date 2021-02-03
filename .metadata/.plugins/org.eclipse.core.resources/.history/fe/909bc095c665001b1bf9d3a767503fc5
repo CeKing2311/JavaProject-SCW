@@ -1,0 +1,5 @@
+package com.ceking.spring.security;
+
+public class SecurityTest {
+
+}

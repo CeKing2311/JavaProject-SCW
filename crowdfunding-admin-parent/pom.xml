@@ -13,7 +13,8 @@
 	<!-- 版本声明 -->
 	<properties>
 		<ceking.srping.version>4.3.20.RELEASE</ceking.srping.version>
-		<ceking.spring.security.version>4.2.10.RELEASE</ceking.spring.security.version>
+		<!-- 4.2.3 -->
+		<ceking.spring.security.version>4.2.3.RELEASE</ceking.spring.security.version>
 	</properties>
 	<!-- 依赖管理 -->
 	<dependencyManagement>
@@ -149,20 +150,21 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-web</artifactId>
-				<version>4.2.10.RELEASE</version>
+				<version>${ceking.spring.security.version}</version>
 			</dependency>
 			<!-- SpringSecurity 配置 -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
-				<version>4.2.10.RELEASE</version>
+				<version>${ceking.spring.security.version}</version>
 			</dependency>
 			<!-- SpringSecurity 标签库 -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-taglibs</artifactId>
-				<version>4.2.10.RELEASE</version>
+				<version>${ceking.spring.security.version}</version>
 			</dependency>
+			
 		</dependencies>
 
 	</dependencyManagement>

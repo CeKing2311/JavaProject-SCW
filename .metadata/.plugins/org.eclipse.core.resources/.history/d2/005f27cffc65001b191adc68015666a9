@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!--以下页面不被拦截 -->
+	<http pattern="/admin/to/login/page.html" security="none"></http>
+	<http pattern="/admin/to/main/page.html" security="none"></http>
+	<http pattern="/bootstrap/**" security="none"></http>
+	<http pattern="/crowd/**" security="none"></http>
+	<http pattern="/css/**" security="none"></http>
+	<http pattern="/fonts/**" security="none"></http>
+	<http pattern="/img/**" security="none"></http>
+	<http pattern="/jquery/**" security="none"></http>
+	<http pattern="/layer/**" security="none"></http>
+	<http pattern="/script/**" security="none"></http>
+	<http pattern="/ztree/**" security="none"></http>
+
+	<!--页面拦截规则 -->
+	<http>
+		<!-- intercept-url:表示拦截规则 pattern：页码的匹配规则，在webapp下面的 access：资源的控制规则，需要什么的条件 -->
+		<!-- 所有的资源都需要是ROLE_ADMIN的角色可以访问  access="hasRole('ROLE_ADMIN')"-->
+		<!-- <intercept-url pattern="/**" filters="none"  access=""/> -->
+		<!-- 表单登录 login-page：登录页面 default-target-url：默认跳转页面 authentication-failure-url：登录错误，跳转错误页面 
+			authentication-failure-url="/login_error.html" login-processing-url="security/to/login.html" -->
+		<intercept-url pattern="/**" />
+		<form-login login-page="/admin/to/login/page.html"
+			default-target-url="/admin/to/main/page.html" 
+			username-parameter="loginAcct" 
+			password-parameter="userPass"  />
+		<!-- 退出登录 -->
+		<logout />
+		<!-- 关闭跨域请求伪造控制。因为静态页无法动态生成token，所以将此功能关闭。一般静态页采用图形验证码的方式实现防止跨域请求伪造的功能。 -->
+		<csrf disabled="true" />
+	</http>
+
+
+	<!-- 认证管理器 -->
+	<!-- <authentication-manager> 认证管理器 <authentication-provider> 认证的提供者，就是用来配置用户名和密码 
+		<user-service> 用户的服务 <user /> 配置用户和密码 -->
+	<authentication-manager>
+		<!-- user-service-ref="userDetailsService" -->
+		<authentication-provider user-service-ref="userDetailsService" >
+			<!-- name：用户名，password:用户密码 authorities：指定用户的角色 -->
+			<!-- <user-service>
+				<user name="admin"
+					password="$2a$10$kqpHZ2nY1p2cJJ.NbKLazuYH6xAqF1SXOGMyibsJ/Yj7XFQ5miEEK"
+					authorities="ROLE_ADMIN" />
+			</user-service> -->
+
+			<!-- 密码使用bcrypt加密 -->
+			<password-encoder ref="bcryptEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- bcrypt加密 -->
+	<beans:bean id="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+	<beans:bean id="userDetailsService"
+		class="com.ceking.crowd.service.impl.UserDetailsServiceImpl"></beans:bean>
+
+</beans:beans>

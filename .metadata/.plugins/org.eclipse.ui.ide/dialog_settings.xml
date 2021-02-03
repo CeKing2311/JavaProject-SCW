@@ -5,12 +5,12 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>
-			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-entity"/>
-			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-entity"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
+			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>
+			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-entity"/>
+			<item value="D:\JavaStudy\Code\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>

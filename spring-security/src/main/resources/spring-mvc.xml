@@ -20,9 +20,9 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="username" value="root"></property>
-		<property name="password" value="CeKing2311"></property>
+		<property name="password" value="Goldcommon13579"></property>
 		<property name="url"
-			value="jdbc:mysql://192.168.1.151:3306/security?useSSL=false"></property>
+			value="jdbc:mysql://10.1.3.102:3306/security?useSSL=false"></property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	</bean>
 	<!-- jdbcTemplate -->
