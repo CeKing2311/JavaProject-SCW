@@ -99,7 +99,7 @@ CREATE TABLE inner_role_auth(
 	auth_id INT 
 );
 
-##################Security#######################
+##################Security#######################securityproject_crowd
 CREATE DATABASE `security` CHARACTER SET utf8;
 USE `security`;
 CREATE TABLE persistent_logins (

@@ -1,0 +1,18 @@
+package com.ceking.crowd.mvc.config;
+
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import com.ceking.crowd.entity.Admin;
+
+public class SecurityAdmin extends User{
+
+	public SecurityAdmin(Admin admin, List<GrantedAuthority> authorities) {
+		
+		super(admin.getUserName(), admin.getUserPswd(), authorities);
+		// TODO Auto-generated constructor stub
+	}
+	
+}

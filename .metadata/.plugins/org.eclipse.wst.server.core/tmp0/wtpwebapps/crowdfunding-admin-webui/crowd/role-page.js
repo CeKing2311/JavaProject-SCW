@@ -28,7 +28,7 @@ function getPageInfoRemote() {
 	var result = resultEntity.result;
 	if (result == "FAILED") {
 		// 请求失败
-		layer.msg(resultEntity.messgae);
+		layer.msg(resultEntity.message);
 		return null;
 	}
 	var pageInfo = resultEntity.data;

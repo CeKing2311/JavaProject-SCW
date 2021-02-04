@@ -1,0 +1,5 @@
+package org.springframework.security.taglibs.authority;
+
+public class AbstractAuthorizeTag {
+
+}

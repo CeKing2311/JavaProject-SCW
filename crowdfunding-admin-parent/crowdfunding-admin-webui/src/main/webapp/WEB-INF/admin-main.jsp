@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@ include file="/WEB-INF/include-head.jsp"%>
@@ -11,32 +12,43 @@
 			<%@ include file="/WEB-INF/include-slidebar.jsp"%>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">控制面板</h1>
-
+				Principal(存放originalAdmin信息)：<security:authentication property="principal.class.name"/><br/>
+				账号：<security:authentication property="principal.originalAdmin.loginAcct"/><br/>
+				姓名：<security:authentication property="principal.originalAdmin.userName"/><br/>
 				<div class="row placeholders">
+					<!-- 页面局部控制 security:authorize -->
+					<security:authorize access="hasRole('经理') or hasAuthority('user:get')">
 					<div class="col-xs-6 col-sm-3 placeholder">
 						<img data-src="holder.js/200x200/auto/sky" class="img-responsive"
 							alt="Generic placeholder thumbnail">
 						<h4>Label</h4>
 						<span class="text-muted">Something else</span>
 					</div>
+					</security:authorize>
+					<security:authorize access="hasAuthority('role:get')">
 					<div class="col-xs-6 col-sm-3 placeholder">
 						<img data-src="holder.js/200x200/auto/vine" class="img-responsive"
 							alt="Generic placeholder thumbnail">
 						<h4>Label</h4>
 						<span class="text-muted">Something else</span>
 					</div>
+					</security:authorize>
+					<security:authorize>
 					<div class="col-xs-6 col-sm-3 placeholder">
 						<img data-src="holder.js/200x200/auto/sky" class="img-responsive"
 							alt="Generic placeholder thumbnail">
 						<h4>Label</h4>
 						<span class="text-muted">Something else</span>
 					</div>
+					</security:authorize>
+					<security:authorize>
 					<div class="col-xs-6 col-sm-3 placeholder">
 						<img data-src="holder.js/200x200/auto/vine" class="img-responsive"
 							alt="Generic placeholder thumbnail">
 						<h4>Label</h4>
 						<span class="text-muted">Something else</span>
 					</div>
+					</security:authorize>
 				</div>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<!-- classpath:spring-security.xml -->
-		<param-value>classpath:spring-persist-mybatis.xml,classpath:spring-security.xml</param-value>
+		<param-value>classpath:spring-persist-mybatis.xml</param-value>
 	</context-param>
 	<!-- Bootstraps the root web application context before servlet initialization -->
 	<listener>

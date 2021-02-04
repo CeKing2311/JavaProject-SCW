@@ -1,0 +1,32 @@
+package com.ceking.crowd.mvc.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.ceking.crowd.entity.Admin;
+import com.ceking.crowd.service.api.AdminService;
+import com.ceking.crowd.service.api.AuthService;
+import com.ceking.crowd.service.api.RoleService;
+
+public class CrowdUserDetailsService implements UserDetailsService {
+	
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private AdminService adminService;
+	@Autowired
+	private AuthService authService;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		//1.查询admin对象
+		Admin admin = adminService.getAdminByLoginAcct(username);
+	   
+	   
+	   
+		return null;
+	}
+
+}

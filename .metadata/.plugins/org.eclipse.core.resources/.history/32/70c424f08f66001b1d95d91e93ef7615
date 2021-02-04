@@ -1,0 +1,54 @@
+package com.ceking.crowd.mvc.config;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.ceking.crowd.entity.Admin;
+import com.ceking.crowd.entity.Role;
+import com.ceking.crowd.service.api.AdminService;
+import com.ceking.crowd.service.api.AuthService;
+import com.ceking.crowd.service.api.RoleService;
+
+public class CrowdUserDetailsService implements UserDetailsService {
+	
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private AdminService adminService;
+	@Autowired
+	private AuthService authService;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		//	1.查询admin对象
+		Admin admin = adminService.getAdminByLoginAcct(username);
+		
+		//	2.获取adminId
+		Integer adminId = admin.getId();
+		//	3.根据adminId获取角色xinx
+		List<Role> roleList = roleService.getAssignedRole(adminId);
+		//	4.根据adminId获取权限信息
+		List<String> authList = authService.getAuthNameByAdminId(adminId);
+		//	5.创建集合对象用来存储
+		List<GrantedAuthority> authorities =new ArrayList<GrantedAuthority>();
+		
+		for (Role role : roleList) {
+			String roleName = "ROLE_"+role.getName();
+			SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roleName);
+			authorities.add(authority);
+			
+		}
+		
+		
+	   
+		return null;
+	}
+
+}

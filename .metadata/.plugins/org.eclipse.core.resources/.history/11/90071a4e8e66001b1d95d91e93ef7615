@@ -1,0 +1,25 @@
+package com.ceking.crowd.mvc.config;
+
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import com.ceking.crowd.entity.Admin;
+
+public class SecurityAdmin extends User{
+
+	private Admin originalAdmin;
+	public SecurityAdmin(Admin originalAdmin, List<GrantedAuthority> authorities) {
+		
+		super(originalAdmin.getUserName(), originalAdmin.getUserPswd(), authorities);
+		this.originalAdmin =originalAdmin;
+	}
+	public Admin getOriginalAdmin() {
+		return originalAdmin;
+	}
+	
+	
+	
+	
+}

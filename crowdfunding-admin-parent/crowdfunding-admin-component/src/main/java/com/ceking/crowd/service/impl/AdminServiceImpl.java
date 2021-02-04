@@ -1,10 +1,13 @@
 package com.ceking.crowd.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ceking.crowd.contant.CrowdConstant;
@@ -26,8 +29,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private AdminMapper adminMapper;
-
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	public void saveAdmin(Admin admin) {
+		String userPswd = admin.getUserPswd();
+		//userPswd= CrowdUtil.md5Encryption(userPswd);
+		userPswd = passwordEncoder.encode(userPswd);
+		admin.setUserPswd(userPswd);	
+		
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String createTime = dateFormat.format(date);
+		admin.setCreateTime(createTime);
+		
 		adminMapper.insert(admin);
 	}
 
@@ -94,6 +110,16 @@ public class AdminServiceImpl implements AdminService {
 			}
 		}
 		
+	}
+
+	@Override
+	public Admin getAdminByLoginAcct(String username) {
+		AdminExample example =new AdminExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andLoginAcctEqualTo(username);
+		List<Admin> list = adminMapper.selectByExample(example);
+		Admin admin = list.get(0);
+		return admin;
 	}
 
 }

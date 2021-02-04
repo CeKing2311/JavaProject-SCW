@@ -2,15 +2,12 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="com.ceking.arowd"/>
-			<item value="com."/>
+			<item value="com.ceking.spring-boot"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="spring-security"/>
-			<item value="spring-annotation"/>
-			<item value="com."/>
+			<item value="spring-boot-maven-project"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -74,6 +71,7 @@
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
+			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

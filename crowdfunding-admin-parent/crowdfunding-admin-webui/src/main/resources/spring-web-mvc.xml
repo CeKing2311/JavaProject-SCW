@@ -24,6 +24,7 @@
 			<props>
 				<!-- key 指定异常全类名，标签体中写对应的视图 -->
 				<prop key="java.lang.Exception">system-error</prop>
+				<prop key="com.ceking.crowd.exception.AccessForbiddenException">admin-login</prop>
 			</props>
 		</property>
 	</bean>

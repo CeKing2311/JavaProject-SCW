@@ -1,0 +1,84 @@
+package com.ceking.crowd.mvc.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+@EnableWebSecurity	//启用web环境下权限控制功能 
+//启用全局方法权限控制功能，prePostEnabled=true,保证@PreAuthorize，@PostAuthorize等注解生效
+@EnableGlobalMethodSecurity(prePostEnabled=true)   
+public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	CrowdUserDetailsService userDetailsService;
+	
+	/**
+	 * 基于盐值的加密
+	 * @return
+	 */
+	/*@Bean
+	public BCryptPasswordEncoder getBCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}*/
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+		
+		//	1.通过内存方式登录
+		/*builder
+			.inMemoryAuthentication()		
+			.withUser("admin").password("123456").roles("ADMIN");	*/
+		
+		//	2.基于数据库的认证
+		builder
+			.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+			
+	}
+	
+	
+	@Override
+	protected void configure(HttpSecurity security) throws Exception {
+		
+		security
+			.authorizeRequests()							  //对请求授权
+			.antMatchers("/admin/to/login/page.html").permitAll()  //登录页放行，无条件访问
+			.antMatchers("/bootstrap/**").permitAll()         //静态资源放行，无条件访问
+			.antMatchers("/crowd/**").permitAll()             //静态资源放行，无条件访问
+			.antMatchers("/css/**").permitAll()               //静态资源放行，无条件访问
+			.antMatchers("/fonts/**").permitAll()             //静态资源放行，无条件访问
+			.antMatchers("/img/**").permitAll()               //静态资源放行，无条件访问
+			.antMatchers("/jquery/**").permitAll()            //静态资源放行，无条件访问
+			.antMatchers("/layer/**").permitAll()             //静态资源放行，无条件访问
+			.antMatchers("/script/**").permitAll()            //静态资源放行，无条件访问
+			.antMatchers("/ztree/**").permitAll()             //静态资源放行，无条件访问			
+			.antMatchers("/admin/get/page.html").hasRole("经理") //针对分页显示Admin数据设置访问权限
+			.anyRequest()		//其他任意请求
+			.authenticated()	//认证后访问							  			
+			.and()
+			.csrf()				//放跨站请求伪造功能
+			.disable()			//禁用
+			.formLogin()										//开启表单登录功能
+			.loginPage("/admin/to/login/page.html")				//指定登录页面
+			.loginProcessingUrl("/security/to/login.html")		//指定处理登录请求的地址
+			.defaultSuccessUrl("/admin/to/main/page.html")		//指定登录成功后跳转的地址,无需登录
+			.usernameParameter("loginAcct")						//账号的请求参数名称
+			.passwordParameter("userPass")						//密码的请求参数名称
+			.and()
+			.logout()											//开启退出登录功能
+			.logoutUrl("/security/to/loginout.html")			//指定退出登录的地址			
+			.logoutSuccessUrl("/admin/to/login/page.html")		//指定退出成功后前往的地址
+			;
+		
+	}
+	
+}

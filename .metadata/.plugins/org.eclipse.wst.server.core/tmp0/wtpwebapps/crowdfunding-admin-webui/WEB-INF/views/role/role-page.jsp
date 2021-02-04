@@ -145,7 +145,8 @@
 						if (res.result == "SUCCESS") {
 							layer.msg("保存成功！");
 							$("#assignAuthModal").modal("hide");
-						}						
+						}
+						
 					},
 					error:function(err){
 						layer.msg(err);

@@ -30,6 +30,9 @@ public class CrowdExceptionResolver {
 	@ExceptionHandler(value = { LoginAcctDuplicateException.class })
 	public ModelAndView resolveDuplicateKeyException(LoginAcctDuplicateException exception, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("resolveDuplicateKeyException");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		String viewName = "admin-add";
 		return commonResolve(viewName, exception, request, response);
 	}
@@ -38,13 +41,20 @@ public class CrowdExceptionResolver {
 	@ExceptionHandler(value = { AccessForbiddenException.class })
 	public ModelAndView resolveAccessForbiddenException(AccessForbiddenException exception, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("resolveAccessForbiddenException");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		String viewName = "admin-login";
 		return commonResolve(viewName, exception, request, response);
 	}
 	
-	@ExceptionHandler(value = { LoginFailedException.class })
-	public ModelAndView resolveLoginFailedException(LoginFailedException exception, HttpServletRequest request,
+	@ExceptionHandler(value = { Exception.class })
+	public ModelAndView resolveException(Exception exception, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("resolveException");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		String viewName = "admin-login";
 		return commonResolve(viewName, exception, request, response);
 	}
@@ -53,21 +63,28 @@ public class CrowdExceptionResolver {
 			HttpServletResponse response) throws Exception {
 		// 1.判断请求类型
 		boolean requestType = CrowdUtil.judgeRequestType(request);
-
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("requestType:"+requestType);
+		
 		if (requestType) {
-			// ajax请求
+			// ajax请求 exception.getMessage()
 			ResultEntity<Object> entity = ResultEntity.failed(exception.getMessage());
 			Gson gson = new Gson();
 			String json = gson.toJson(entity);
+			System.out.println("json:"+json);
 			response.getWriter().write(json);
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return null;
 		} else {
 			// 非ajax请求
 			ModelAndView modelAndView = new ModelAndView();
+			System.out.println("result:"+CrowdConstant.ATTR_NAME_EXCEPTION);
 			modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
 			modelAndView.setViewName(viewName);
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return modelAndView;
 		}
+		
 	}
 
 }

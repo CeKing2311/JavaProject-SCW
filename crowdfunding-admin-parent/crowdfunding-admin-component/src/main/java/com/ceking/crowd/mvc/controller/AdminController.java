@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +28,7 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
 	
 	/**
 	 * 更新用户
@@ -56,17 +60,9 @@ public class AdminController {
 	 * @param admin
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('user:add')")
 	@RequestMapping("admin/save.html")
 	public String saveAdmin(Admin admin){
-		String userPswd = admin.getUserPswd();
-		userPswd= CrowdUtil.md5Encryption(userPswd);
-		admin.setUserPswd(userPswd);	
-		
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String createTime = dateFormat.format(date);
-		admin.setCreateTime(createTime);
-		
 		
 		try {
 			adminService.saveAdmin(admin);	

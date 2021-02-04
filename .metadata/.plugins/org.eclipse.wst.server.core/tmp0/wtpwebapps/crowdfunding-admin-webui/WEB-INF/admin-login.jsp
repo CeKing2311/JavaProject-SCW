@@ -28,7 +28,7 @@
 	</nav>
 	<div class="container">
 		<!-- admin/to/login.html 使用spring-security进行登录验证security/to/login.html -->
-		<form action="admin/to/login.html" method="post"
+		<form action="security/to/login.html" method="post"
 			class="form-signin" role="form">
 			<h2 class="form-signin-heading">
 				<i class="glyphicon glyphicon-log-in"></i> 管理员登录
@@ -44,7 +44,7 @@
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-success has-feedback">
-				<input type="password" name="userPass" value="123456"
+				<input type="text" name="userPass" value="123456"
 					class="form-control" id="userPass" placeholder="请输入登录密码"
 					style="margin-top: 10px;"> <span
 					class="glyphicon glyphicon-lock form-control-feedback"></span>

@@ -1,0 +1,5 @@
+package com.ceking.spring.boot.controller;
+
+public class HelloController {
+
+}
