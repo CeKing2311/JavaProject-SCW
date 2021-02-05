@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ceking.crowd</groupId>
+  <artifactId>crowdfunding-member-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>crowdfunding-member-eureka</module>
+  	<module>crowdfunding-member-entity</module>
+  	<module>crowdfunding-member-mysql-provider</module>
+  	<module>crowdfunding-member-redis-provider</module>
+  	<module>crowdfunding-member-authentication-consumer</module>
+  	<module>crowdfunding-member-project-consumer</module>
+  </modules>
+</project>
