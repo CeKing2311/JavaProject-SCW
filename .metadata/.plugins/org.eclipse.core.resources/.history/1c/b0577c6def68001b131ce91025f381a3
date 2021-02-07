@@ -1,0 +1,13 @@
+package com.ceking.crowd.api;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ceking.crowd.entity.po.MemberPO;
+import com.ceking.crowd.util.ResultEntity;
+
+@FeignClient("ceking-crowd-mysql")
+public class MySQLRemoteService {
+	
+	ResultEntity<MemberPO> getMemberPOByLoginAcctRemote(@RequestParam("loginacct") String  loginacct)
+}

@@ -1,0 +1,7 @@
+package com.ceking.crowd.service.impl;
+
+import com.ceking.crowd.service.api.MemberService;
+
+public class MemberServiceImpl implements MemberService {
+	
+}

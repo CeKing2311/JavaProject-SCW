@@ -1,0 +1,20 @@
+package com.ceking.crowd.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ceking.crowd.entity.po.MemberPO;
+import com.ceking.crowd.util.ResultEntity;
+
+@RestController
+public class MemberProviderController {
+	
+	
+	
+	@RequestMapping("/get/memberpo/by/loginacct/remote")
+	ResultEntity<MemberPO> getMemberPOByLoginAcctRemote(@RequestParam("loginacct") String  loginacct){
+		
+		
+	}
+}

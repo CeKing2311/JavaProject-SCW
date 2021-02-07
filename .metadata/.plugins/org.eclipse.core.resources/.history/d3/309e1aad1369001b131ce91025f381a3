@@ -1,0 +1,19 @@
+package com.ceking.crowd.test;
+
+import org.junit.Test;
+
+import common.SendMessage;
+
+public class MessageTest {
+	
+	@Test
+	public void testMessage(){
+		SendMessage sendMessage =new SendMessage();
+		String mobile="18200266219";
+		
+		String content="【永同昌集团】尊敬的客户，祝您新年快乐！！！";
+		String result = sendMessage.sendMessage(mobile, content);
+		
+	}
+	
+}

@@ -1,0 +1,5 @@
+package com.ceking.crowd.service.impl;
+
+public class MemberServiceImpl {
+
+}

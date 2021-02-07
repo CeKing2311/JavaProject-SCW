@@ -19,16 +19,18 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="AbstractAuthorizeTag"/>
-			<item value="admin/to/login.html"/>
-			<item value="username"/>
-			<item value="invokeDelegate"/>
-			<item value="doFi"/>
-			<item value="initFilterBean"/>
-			<item value="doFilter"/>
-			<item value="do"/>
+			<item value="eureka"/>
+			<item value="devtool"/>
+			<item value="`"/>
+			<item value="dev"/>
+			<item value="com.ceking.crowd.entity.MemberPOExample"/>
+			<item value="com.ceking.crowd.entity.MemberPO"/>
+			<item value="lombok.version"/>
+			<item value="lombok"/>
 		</list>
 		<list key="replacehistory">
+			<item value="com.ceking.crowd.entity.po.MemberPOExample"/>
+			<item value="com.ceking.crowd.entity.po.MemberPO"/>
 			<item value="ceking"/>
 		</list>
 	</section>
@@ -36,7 +38,7 @@
 		<item value="300" key="DIALOG_WIDTH"/>
 		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
 		<item value="410" key="DIALOG_HEIGHT"/>
-		<item value="1148" key="DIALOG_X_ORIGIN"/>
-		<item value="208" key="DIALOG_Y_ORIGIN"/>
+		<item value="184" key="DIALOG_X_ORIGIN"/>
+		<item value="204" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

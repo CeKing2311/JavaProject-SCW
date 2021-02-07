@@ -1,0 +1,17 @@
+package com.ceking.crowd.config;
+
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+public class CrowdWebMvcConfig implements WebMvcConfigurer {
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		
+		//浏览器访问地址
+		String urlPath="/auth/member/to/regist/page.html";
+		//目标视图名称
+		String viewName="member-regist";
+		
+		registry.addViewController(urlPath).setViewName(viewName);
+	}
+}

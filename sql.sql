@@ -99,7 +99,7 @@ CREATE TABLE inner_role_auth(
 	auth_id INT 
 );
 
-##################Security#######################securityproject_crowd
+##################Security#######################
 CREATE DATABASE `security` CHARACTER SET utf8;
 USE `security`;
 CREATE TABLE persistent_logins (
@@ -110,7 +110,23 @@ last_used TIMESTAMP NOT NULL
 );
  
 
-################################################
+####################会员端############################
+CREATE TABLE t_member
+(
+id INT(11) NOT NULL AUTO_INCREMENT,
+loginacct VARCHAR(255) NOT NULL,
+userpswd CHAR(200) NOT NULL,
+username VARCHAR(255),
+email  VARCHAR(255),
+authstatus INT(4) COMMENT '实名认证状态 0 - 未实名认证， 1 - 实名认证申请中， 2 - 已实名认证',
+usertype INT(4) COMMENT ' 0 - 个人， 1 - 企业',
+realname VARCHAR(255),
+cardnum VARCHAR(255),
+accttype INT(4) COMMENT '0 - 企业， 1 - 个体， 2 - 个人， 3 - 政府',
+PRIMARY KEY (id)
+);
+
+
 
 
 

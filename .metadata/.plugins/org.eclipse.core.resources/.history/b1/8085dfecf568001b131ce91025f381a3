@@ -1,0 +1,5 @@
+package com.ceking.crowd.config;
+
+public class RedisConfig {
+
+}

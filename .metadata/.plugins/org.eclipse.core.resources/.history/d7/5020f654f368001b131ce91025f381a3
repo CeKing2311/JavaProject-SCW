@@ -1,0 +1,5 @@
+package com.ceking.crowd.api;
+
+public interface RedisRemoteService {
+
+}

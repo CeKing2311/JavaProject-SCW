@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: ceking-crowd-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka 
+
+zuul:
+  ignored-services: "*"  #忽略原本微服务名称    
+  sensitive-headers: "*" #在Zuul向其他微服务做重定向时保持原消息头    
+  routes:    
+    crowd-protal:
+      service-id: ceking-crowd-auth
+      path: /**  #支持访问多层目录

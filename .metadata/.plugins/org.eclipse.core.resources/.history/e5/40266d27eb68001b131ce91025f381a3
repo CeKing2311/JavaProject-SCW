@@ -1,0 +1,5 @@
+package com.ceking.crowd.mapper;
+
+public class MemberPOMapper {
+
+}

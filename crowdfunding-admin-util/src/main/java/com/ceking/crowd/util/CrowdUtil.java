@@ -3,10 +3,13 @@ package com.ceking.crowd.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ceking.crowd.contant.CrowdConstant;
+
+import common.SendMessage;
 
 /**
  * 通用工具类
@@ -15,6 +18,28 @@ import com.ceking.crowd.contant.CrowdConstant;
  *
  */
 public class CrowdUtil {
+
+	public static ResultEntity<String> sendCodeMessage(String mobile,Integer codeLength, String sign) {
+		SendMessage sendMessage = new SendMessage();
+		String code = randomCode(codeLength);
+		String content = sign + "尊敬的客户，您的验证码为:" + code + ",请在5分钟内使用！";
+		String result = sendMessage.sendMessage(mobile, content);
+		MessageResultEntity resultEntity = MessageResultEntity.convertJsonToMessageResultEntity(result);
+		if ("success".equals(resultEntity.getStatus())) {
+			return ResultEntity.successWithData(code);
+		} else {
+			return ResultEntity.failed(resultEntity.getMsg());
+		}
+	}
+
+	private static String randomCode(Integer length) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			int random = (int) (Math.random() * 10);
+			builder.append(random);
+		}
+		return builder.toString();
+	}
 
 	/**
 	 * 判断请求类型
@@ -38,35 +63,32 @@ public class CrowdUtil {
 	 */
 	public static String md5Encryption(String source) {
 		if (source == null || source.length() == 0) {
-			//	无效字符串，抛出异常
+			// 无效字符串，抛出异常
 			throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE);
 		}
-		//	获取MessageDigest 
-		String algorithm="md5";
+		// 获取MessageDigest
+		String algorithm = "md5";
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-			
-			//	获取字符串字节数组
+
+			// 获取字符串字节数组
 			byte[] input = source.getBytes();
-			//	执行加密
+			// 执行加密
 			byte[] ouput = messageDigest.digest(input);
-			//	创建BigInteger对象
-			int signum=1;
-			BigInteger integer = new BigInteger(signum,ouput);
-			
-			//	按照16进制将integer的值转为字符串
-			int radix=16;
-			String encoded = integer.toString(radix).toUpperCase();			
+			// 创建BigInteger对象
+			int signum = 1;
+			BigInteger integer = new BigInteger(signum, ouput);
+
+			// 按照16进制将integer的值转为字符串
+			int radix = 16;
+			String encoded = integer.toString(radix).toUpperCase();
 			return encoded;
-			
+
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
-	
-	
 
 }

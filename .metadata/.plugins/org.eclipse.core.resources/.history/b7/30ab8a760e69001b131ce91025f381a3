@@ -1,0 +1,14 @@
+package com.ceking.crowd.util;
+
+public class DESEncrypt {
+
+	private String key = "Goldcommon@Lucuas";
+
+	public DESEncrypt() {
+		super();
+	}
+	
+	
+	
+	
+}

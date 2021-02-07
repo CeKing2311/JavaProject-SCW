@@ -1,0 +1,13 @@
+server:
+  port: 8090
+ 
+spring:
+  application:
+    name: ceking-crowd-mysql
+    
+eureka:
+  client:
+    service-url:
+      defauleZone: http://localhost:7001/eureka
+      
+      

@@ -2,12 +2,15 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="com.ceking.spring-boot"/>
+			<item value="com.ceking.crowd"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="spring-boot-maven-project"/>
+			<item value="ceking-submail-message"/>
+			<item value="submail-message"/>
+			<item value="crowdfunding-member-api"/>
+			<item value="crowdfunding-member-parent"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -65,12 +68,21 @@
 	</section>
 	<section name="MavenModuleWizardParentPage">
 		<list key="moduleName">
+			<item value="crowdfunding-member-api"/>
+			<item value="crowdfunding-member-zuul"/>
+			<item value="crowdfunding-member-pay-consumer"/>
+			<item value="crowdfunding-member-order-consumer"/>
+			<item value="crowdfunding-member-project-consumer"/>
+			<item value="crowdfunding-member-authentication-consumer"/>
+			<item value="crowdfunding-member-redis-provider"/>
+			<item value="crowdfunding-member-mysql-provider"/>
+			<item value="crowdfunding-member-entity"/>
+			<item value="crowdfunding-member-eureka"/>
 			<item value="com."/>
 			<item value="crowdfunding-admin-util"/>
 			<item value="crowdfunding-admin-entity"/>
 			<item value="cr"/>
 			<item value="crowdfunding-admin-component"/>
-			<item value="crowdfunding-admin-webui"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -83,6 +95,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-member-parent"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>
 		</list>

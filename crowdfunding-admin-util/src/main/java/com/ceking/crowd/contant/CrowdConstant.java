@@ -24,5 +24,7 @@ public class CrowdConstant {
 	public static final String MESSAGE_SYSTEM_ERROR_LOGIN_NOT_UNIQUE = "系统错误:登录账号不唯一";
 
 	public static final String MESSAGE_ACCESS_DENIED = "抱歉，不能访问此资源！";
+
+	public static final String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX";
 	
 }

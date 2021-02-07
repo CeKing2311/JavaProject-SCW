@@ -1,0 +1,12 @@
+package com.ceking.crowd.config;
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RedisConfig {
+	
+	public RedisTemplate getRedisTemplate() {
+		return new RedisTemplate<>();
+	}
+}

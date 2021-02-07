@@ -1,0 +1,12 @@
+server:
+  port: 8001 
+  
+spring:
+  application:
+    name: ceking-crowd-auth
+  thymeleaf:
+    prefix: classpath:/templates/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka   

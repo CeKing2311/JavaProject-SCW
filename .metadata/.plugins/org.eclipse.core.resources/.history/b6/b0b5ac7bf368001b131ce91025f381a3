@@ -1,0 +1,8 @@
+package com.ceking.crowd.api;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient("ceking-crowd-redis")
+public interface RedisRemoteService {
+	
+}

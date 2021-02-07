@@ -1,0 +1,12 @@
+package com.ceking.crowd.test;
+
+import org.junit.Test;
+
+public class MessageTest {
+	
+	@Test
+	public void testMessage(){
+		
+	}
+	
+}

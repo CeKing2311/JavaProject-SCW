@@ -1,0 +1,14 @@
+package com.ceking.crowd.config;
+
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+public class CrowdWebMvcConfig implements WebMvcConfigurer {
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		
+		String urlPath="";
+		String viewName="";
+		registry.addViewController(urlPath).setViewName(viewName);
+	}
+}

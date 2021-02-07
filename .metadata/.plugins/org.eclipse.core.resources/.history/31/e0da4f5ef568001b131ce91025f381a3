@@ -1,0 +1,10 @@
+server:
+  port: 8096
+
+spring:
+  application:
+    name: ceking-crowd-redis   
+  redis:
+    port: 6379
+    url: localhost
+    

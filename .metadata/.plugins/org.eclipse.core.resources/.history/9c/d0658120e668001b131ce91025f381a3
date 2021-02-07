@@ -1,0 +1,12 @@
+package com.ceking.crowd;
+
+import org.apache.http.impl.execchain.MainClientExec;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MySqlProviderMain {
+	public static void main(String[] args) {
+		SpringApplication.run(MySqlProviderMain.class, args);
+	}
+}

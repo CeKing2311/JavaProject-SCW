@@ -1,0 +1,18 @@
+package common;
+
+import config.AppConfig;
+import lib.MessageSend;
+import utils.ConfigLoader;
+
+public class SendMessage {
+	
+	AppConfig config = ConfigLoader.load(ConfigLoader.ConfigType.Message);
+	public void sendMessage(String mobile){
+		
+		MessageSend submail = new MessageSend(config);
+		submail.addTo("18200266219");
+		submail.addContent("【永同昌集团】你好，你的验证码是4564");
+		submail.send();
+		
+	}
+}

@@ -1,0 +1,30 @@
+server:
+  port: 9000
+ 
+spring:
+  application:
+    name: ceking-crowd-mysql
+  datasource:
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://10.1.3.102:3306/project_crowd?serverTimezone=UTC
+    username: root
+    password: Goldcommon13579
+    driver-class-name: com.mysql.cj.jdbc.Driver
+   
+eureka:
+  client:
+    service-url:
+      defauleZone: http://localhost:7001/eureka
+      
+mybatis:
+  mapper-locations: classpath*:/mybatis/mapper/*Mapper.xml
+
+logging:
+  level:
+    com.ceking.crowd.mapper: debug 
+    com.ceking.crowd.test: debug
+    
+          
+      
+      
