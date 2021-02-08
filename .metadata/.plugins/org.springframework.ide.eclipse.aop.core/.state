@@ -3,6 +3,7 @@
 <aop-project name="crowdfunding-member-authentication-consumer"/>
 <aop-project name="crowdfunding-admin-component"/>
 <aop-project name="crowdfunding-member-mysql-provider"/>
+<aop-project name="spring-session-one"/>
 <aop-project name="spring-security"/>
 <aop-project name="crowdfunding-admin-webui">
 <aspect-definition advice-class-name="org.springframework.transaction.interceptor.TransactionInterceptor" advice-method-name="invoke" advice-method-parameter-types="org.aopalliance.intercept.MethodInvocation" advice-type="AROUND" aspect-end-line-number="65" aspect-name="txAdvice" aspect-start-line-number="65" factory-id="org.springframework.ide.eclipse.aop.core.javaAdvisorDefinitionElementFactory" file="/crowdfunding-admin-webui/src/main/resources/spring-persist-mybatis.xml" pointcut-expression="execution(* *..*ServiceImpl.*(..))" proxy-target-class="false">

@@ -1,0 +1,7 @@
+package com.ceking.crowd.entity.vo;
+
+public class MemberVO {
+	private String loginacct;
+	private String userpswd;
+	private String username;
+}

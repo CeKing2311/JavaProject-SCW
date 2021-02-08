@@ -1,0 +1,5 @@
+package com.ceking.crowd.entity.vo;
+
+public class MemberLoginVO {
+
+}

@@ -7,6 +7,8 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="spring-session-two"/>
+			<item value="spring-session-one"/>
 			<item value="ceking-submail-message"/>
 			<item value="submail-message"/>
 			<item value="crowdfunding-member-api"/>
@@ -95,6 +97,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\spring-session-one"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-member-parent"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-component"/>
 			<item value="D:\JavaStudy\Code\Project\JavaProject-SCW\crowdfunding-admin-parent\crowdfunding-admin-webui"/>

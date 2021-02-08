@@ -62,6 +62,7 @@ public class CrowdUtil {
 	 * @return
 	 */
 	public static String md5Encryption(String source) {
+		
 		if (source == null || source.length() == 0) {
 			// 无效字符串，抛出异常
 			throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE);

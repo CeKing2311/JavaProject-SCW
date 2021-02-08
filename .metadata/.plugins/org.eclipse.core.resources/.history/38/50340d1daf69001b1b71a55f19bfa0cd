@@ -1,0 +1,5 @@
+package com.ceking.crowd.entity.po;
+
+public class Order {
+
+}

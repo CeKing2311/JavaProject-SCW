@@ -11,6 +11,8 @@ public class CrowdConstant {
 	
 	public static final String ATTR_NAME_LOGIN_ADMIN="loginAdmin";
 	
+	public static final String ATTR_NAME_LOGIN_MEMBER="loginMember";
+	
 	public static final String ATTR_NAME_PAGE_INFO="pageInfo";
 	
 	public static final String MESSAGE_LOGIN_FAILED="登录失败，请重新输入账号密码!";
@@ -26,5 +28,11 @@ public class CrowdConstant {
 	public static final String MESSAGE_ACCESS_DENIED = "抱歉，不能访问此资源！";
 
 	public static final String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX";
+
+	public static final String ATTR_NAME_MESSAGE = "message";
+
+	public static final Object MESSAGE_CODE_NOT_EXIST = "验证码已过期！请重新发送！";
+
+	public static final Object MESSAGE_CODE_INVALID = "验证码错误！";
 	
 }
